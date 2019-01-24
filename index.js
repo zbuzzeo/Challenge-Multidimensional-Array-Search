@@ -1,20 +1,10 @@
 function locate(array, target) {
+  if (!isArray) { return array === target; }
+  else if (isArray && array.length <= 0) { return false; }
 
-  const flattenArrays = (array) => {
-    let stack = [];
-
-    array.forEach(item => {
-      if (Array.isArray(item)) {
-        stack = stack.concat(flattenArrays(item));
-      } else {
-        stack.push(item);
-      }
-    });
-
-    return stack;
-  }
-
-  return flattenArrays(array).includes(target);
+  return array.some(current => {
+    return locate(current, target);
+  });
 }
 
 module.exports = locate;
